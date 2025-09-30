@@ -32,25 +32,19 @@ function M.setup()
   local capabilities = cmp_lsp.default_capabilities()
   
   -- Add modern LSP capabilities
-  capabilities.textDocument.inlayHint = {
-    dynamicRegistration = false,
-    resolveSupport = {
-      properties = {}
-    }
-  }
+  -- capabilities.textDocument.inlayHint = {
+  --   dynamicRegistration = false,
+  --   resolveSupport = {
+  --     properties = {}
+  --   }
+  -- }
 
   -- LSP servers using modern vim.lsp.config API
   vim.lsp.config("ts_ls", {
     cmd = { "typescript-language-server", "--stdio" },
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     root_dir = vim.fs.dirname(vim.fs.find({ "package.json", "tsconfig.json", ".git" }, { upward = true })[1]),
-    on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-      -- Enable inlay hints for TypeScript
-      if vim.lsp.inlay_hint then
-        vim.lsp.inlay_hint.enable(bufnr, true)
-      end
-    end,
+    on_attach = on_attach,
     capabilities = capabilities,
     settings = {
       typescript = {

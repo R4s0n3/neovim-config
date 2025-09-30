@@ -68,7 +68,6 @@ return {
       },
       highlight = { enable = true },
       indent = { enable = true },
-      autotag = { enable = true }, -- Auto-close HTML/JSX tags
     },
     config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
   },
