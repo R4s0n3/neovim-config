@@ -48,6 +48,15 @@ vim.keymap.set("n", "<leader>ih", function()
   end
 end, { desc = "Toggle inlay hints" })
 
+-- Web development keymaps
+vim.keymap.set("i", "<C-y>", "<C-R>=emmet#expandAbbrIntelligent(\"<cr>\")<cr>", { desc = "Emmet expand" })
+vim.keymap.set("n", "<leader>cc", ":HighlightColorsToggle<CR>", { desc = "Toggle color highlighting" })
+
+-- LSP management
+vim.keymap.set("n", "<leader>li", ":Mason<CR>", { desc = "Open Mason installer" })
+vim.keymap.set("n", "<leader>ls", ":LspInfo<CR>", { desc = "Show LSP info" })
+vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "Restart LSP" })
+
 -- Global Autoformat on Save with error handling
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()

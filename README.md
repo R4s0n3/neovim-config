@@ -5,12 +5,13 @@ A modern Neovim configuration built with Lua and lazy.nvim for efficient plugin 
 ## Features
 
 - **Plugin Management**: Uses [lazy.nvim](https://github.com/folke/lazy.nvim) for fast and efficient plugin loading
-- **LSP Support**: Modern LSP configuration for TypeScript, Tailwind CSS, and Prisma with auto-completion and inlay hints
+- **LSP Support**: Comprehensive LSP configuration for 10+ languages with auto-completion, inlay hints, and automatic installation
 - **File Explorer**: Nvim-tree for file navigation
 - **Fuzzy Finder**: Telescope for file searching and live grep
-- **Syntax Highlighting**: Treesitter with support for multiple languages
+- **Syntax Highlighting**: Treesitter with support for 30+ languages including web technologies
 - **Code Formatting**: Built-in LSP formatting with manual Biome and Prisma formatting
 - **Modern UI**: Rose-pine colorscheme with transparency support
+- **Web Development**: Emmet support, auto-closing tags, color highlighting, and comprehensive CSS/HTML support
 
 ## Prerequisites
 
@@ -76,6 +77,15 @@ A modern Neovim configuration built with Lua and lazy.nvim for efficient plugin 
 - `<leader>f` - Format buffer
 - `<leader>ih` - Toggle inlay hints
 
+### Web Development
+- `<C-y>` - Emmet expand (in insert mode)
+- `<leader>cc` - Toggle color highlighting
+
+### LSP Management
+- `<leader>li` - Open Mason installer
+- `<leader>ls` - Show LSP info
+- `<leader>lr` - Restart LSP
+
 ## Configuration Structure
 
 ```
@@ -93,12 +103,30 @@ A modern Neovim configuration built with Lua and lazy.nvim for efficient plugin 
 
 ## Supported Languages
 
-- Lua
-- TypeScript/JavaScript
-- JSON
-- YAML
+### Web Development
+- TypeScript/JavaScript (with JSX/TSX support)
+- HTML/CSS/SCSS (with Tailwind CSS support)
+- JSON/YAML
 - Prisma
-- HTML/CSS (with Tailwind CSS support)
+
+### General Purpose
+- Python
+- Go
+- Rust
+- C/C++
+- Java/Kotlin
+- PHP/Ruby
+- Swift
+
+### Configuration & Markup
+- Lua
+- Markdown
+- TOML
+- Dockerfile
+- Shell scripts (Bash/Fish/Zsh)
+- Git files
+
+**Note**: Core LSP servers are pre-configured. Use `:Mason` to install additional language servers as needed.
 
 ## Customization
 
@@ -128,6 +156,16 @@ If plugins aren't loading:
 ### Formatting Issues
 - For JavaScript/TypeScript: Ensure Biome is installed and in PATH
 - For Prisma: Ensure Prisma CLI is installed and in PATH
+
+### LSP Issues
+- If LSP servers fail to install: Use `:Mason` to manually install them
+- For Go/Rust issues: These LSPs are commented out due to installation complexity
+- To add more languages: Edit `lua/lsp.lua` and uncomment/add LSP configurations
+
+### Treesitter Issues
+- If parsers fail to install: Some parsers like `jsx`, `swift`, `zsh` are not available
+- Use `:TSInstall <language>` to manually install specific parsers
+- Check `:TSInstallInfo` to see available parsers
 
 ## License
 

@@ -30,21 +30,77 @@ return {
     build = ":TSUpdate",
     opts = {
       ensure_installed = {
+        -- Web Development
         "lua",
         "typescript",
         "javascript",
+        "tsx",
+        "html",
+        "css",
+        "scss",
         "json",
         "yaml",
         "prisma",
+        
+        -- General Purpose
+        "python",
+        "go",
+        "rust",
+        "c",
+        "cpp",
+        "java",
+        "kotlin",
+        "php",
+        "ruby",
+        
+        -- Markup & Config
+        "markdown",
+        "toml",
+        "dockerfile",
+        "gitignore",
+        "gitcommit",
+        "git_rebase",
+        "diff",
+        
+        -- Shell & Scripting
+        "bash",
+        "fish",
       },
       highlight = { enable = true },
       indent = { enable = true },
+      autotag = { enable = true }, -- Auto-close HTML/JSX tags
     },
     config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
   },
 
   -- Prisma Vim plugin fallback
   { "pantharshit00/vim-prisma" },
+
+  -- Auto-close HTML/JSX tags
+  {
+    "windwp/nvim-ts-autotag",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+
+  -- Emmet for HTML/CSS
+  {
+    "mattn/emmet-vim",
+    ft = { "html", "css", "scss", "javascript", "typescript", "jsx", "tsx" },
+  },
+
+  -- Better CSS support
+  {
+    "brenoprata10/nvim-highlight-colors",
+    config = function()
+      require("nvim-highlight-colors").setup({
+        enable_named_colors = true,
+        enable_tailwind = true,
+      })
+    end,
+  },
 
   -- Telescope
   {

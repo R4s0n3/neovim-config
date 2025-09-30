@@ -94,6 +94,97 @@ function M.setup()
     capabilities = capabilities,
   })
 
+  -- HTML LSP
+  vim.lsp.config("html", {
+    filetypes = { "html", "htm" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
+  -- CSS LSP
+  vim.lsp.config("cssls", {
+    filetypes = { "css", "scss", "sass", "less" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
+  -- JSON LSP
+  vim.lsp.config("jsonls", {
+    filetypes = { "json", "jsonc" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      json = {
+        schemas = {
+          {
+            fileMatch = { "package.json" },
+            url = "https://json.schemastore.org/package.json",
+          },
+          {
+            fileMatch = { "tsconfig*.json" },
+            url = "https://json.schemastore.org/tsconfig.json",
+          },
+          {
+            fileMatch = { ".eslintrc*.json" },
+            url = "https://json.schemastore.org/eslintrc.json",
+          },
+        },
+      },
+    },
+  })
+
+  -- YAML LSP
+  vim.lsp.config("yamlls", {
+    filetypes = { "yaml", "yml" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
+  -- Lua LSP
+  vim.lsp.config("lua_ls", {
+    filetypes = { "lua" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      Lua = {
+        runtime = {
+          version = "LuaJIT",
+        },
+        diagnostics = {
+          globals = { "vim" },
+        },
+        workspace = {
+          library = vim.api.nvim_get_runtime_file("", true),
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  })
+
+  -- Python LSP
+  vim.lsp.config("pyright", {
+    filetypes = { "python" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
+  -- Go LSP (commented out due to installation issues)
+  -- vim.lsp.config("gopls", {
+  --   filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  -- })
+
+  -- Rust LSP (commented out due to installation issues)
+  -- vim.lsp.config("rust_analyzer", {
+  --   filetypes = { "rust" },
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  -- })
+
   -- Mason setup with error handling
   local mason_ok, mason = pcall(require, "mason")
   if mason_ok then
@@ -103,7 +194,23 @@ function M.setup()
   local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
   if mason_lsp_ok then
     mason_lsp.setup({
-      ensure_installed = { "ts_ls", "tailwindcss", "prismals" },
+      ensure_installed = {
+        -- Web Development (core)
+        "ts_ls",           -- TypeScript/JavaScript
+        "tailwindcss",     -- Tailwind CSS
+        "html",            -- HTML
+        "cssls",           -- CSS
+        "jsonls",          -- JSON
+        "yamlls",          -- YAML
+        
+        -- Database
+        "prismals",        -- Prisma
+        
+        -- General Purpose (stable)
+        "lua_ls",          -- Lua
+        "pyright",         -- Python
+      },
+      automatic_installation = false, -- Disable auto-install to prevent errors
     })
   end
 
