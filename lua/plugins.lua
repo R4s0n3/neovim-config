@@ -18,8 +18,12 @@ return {
     version = "*",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+      local wildignore = require("wildignore")
       require("nvim-tree").setup({
         view = { side = "right" },
+        filters = {
+          custom = wildignore.patterns,
+        },
       })
     end,
   },
@@ -107,9 +111,10 @@ return {
     branch = "0.1.x",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+      local wildignore = require("wildignore")
       require("telescope").setup({
         defaults = {
-          file_ignore_patterns = { "node_modules", "%.git/" },
+          file_ignore_patterns = wildignore.patterns,
         },
       })
 -- Load extensions if installed
